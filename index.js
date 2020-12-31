@@ -21,9 +21,7 @@ var month =d.getMonth();
 var year =d.getFullYear();
 str=str+n+" "+date+"/"+month+"/"+year;
 document.getElementById('date').innerHTML=str;
-//localStorage.setItem("toDoListLenght",0);
-//localStorage.setItem("completedListLength",0);
-//localStorage.clear();
+
 if (typeof(Storage) !== "undefined") {
   if (localStorage.getItem("toDoListLenght") === null) {
     localStorage.setItem("toDoListLenght",0);
@@ -40,6 +38,10 @@ if (typeof(Storage) !== "undefined") {
 function addtask(){
         var task;
         task = document.getElementById('task').value;
+        if(task ==""){
+          alert("enter task item ");
+        }
+        else{
         var table = document.getElementById("myTable");
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
@@ -47,9 +49,9 @@ function addtask(){
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         cell1.innerHTML = "<td> <i class='material-icons'>assignment</i></td>";
-        cell2.innerHTML = task;
-        cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'>Complete</button>";
-        cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'>Delete</button>";
+        cell2.innerHTML = "<td class='container border border-danger'>"+task+"</td>";
+        cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'><i class='material-icons'>done</i></button>";
+        cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'><i class='material-icons'>delete</i></button>";
         document.getElementById('task').innerHTML="";
 
         localStorage.setItem("toDoListLenght",parseInt(localStorage.getItem("toDoListLenght"))+1);
@@ -57,7 +59,7 @@ function addtask(){
         temp["item"+parseInt(localStorage.getItem("toDoListLenght"))]=task;
 
         document.getElementById("task").value="";
-
+      }
     }
 
 function  deletetask(element) {
@@ -67,10 +69,8 @@ function  deletetask(element) {
     var column = element.closest('td').cellIndex;
     console.log("row = "+row +" column = "+" "+column);
     var table = document.getElementById("myTable");
-    var x=table.rows[row].cells.item(column-1).innerHTML;
     var keyval=table.rows[row].cells.item(1).innerHTML;
     console.log("..key: ",keyval);
-    console.log(x);
     table.deleteRow(row);
 
     
@@ -97,7 +97,7 @@ function  deletetask(element) {
     var cell3 = row.insertCell(2);
     cell1.innerHTML = "<td> <i class='material-icons'>assignment_turned_in</i></td>";
     cell2.innerHTML = "<td>"+task+"</td>";
-    cell3.innerHTML = "<td><input type='button' class='btn-sm btn-primary ' onclick='undotask(this)' value='Undo'></td>";
+    cell3.innerHTML = "<td><button type='button' class='btn-sm btn-primary ' onclick='undotask(this)'><i class='material-icons'>undo</i></button></td>";
     table.deleteRow(rowno);
 
 
@@ -127,8 +127,8 @@ function  deletetask(element) {
         var cell4 = row.insertCell(3);
         cell1.innerHTML = "<td> <i class='material-icons'>assignment</i></td>";
         cell2.innerHTML = task;
-        cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'>Complete</button>";
-        cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'>Delete</button>";
+        cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'><i class='material-icons'>done</i></button>";
+        cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'><i class='material-icons'>delete</i></button>";
         completetable.deleteRow(rowno);
 
 
@@ -149,10 +149,7 @@ function  deletetask(element) {
   {
 
     if (typeof(Storage) !== "undefined") {
-  //     // Store
-  // localStorage.setItem("todolsname", "toDoList");
-  // // Retrieve
-  // console.log(localStorage.getItem("listLength"));
+
    var len = parseInt(localStorage.getItem("toDoListLenght"));
    console.log("length  "+len);
   for(var i=0;i<=len;i++)
@@ -166,16 +163,7 @@ function  deletetask(element) {
     }
    
   }
-//  var dataObject = { 'item1': 1, 'item2': 2, 'item3': 3 };
-  
-  // Set localStorage item
-//  localStorage.setItem('dataObject', JSON.stringify(dataObject));
-  
-  // Retrieve the object from localStorage
-//  var retrievedObject = localStorage.getItem('dataObject');
-  
-  // console.log retrieved item
-//  console.log('retrieved data Object: ', JSON.parse(retrievedObject));
+
     } else {
       alert("Sorry! No Web Storage support..");
     }
@@ -191,8 +179,8 @@ function  deletetask(element) {
     var cell4 = row.insertCell(3);
     cell1.innerHTML = "<td> <i class='material-icons'>assignment</i></td>";
     cell2.innerHTML = task;
-    cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'>Complete</button>";
-    cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'>Delete</button>";
+    cell3.innerHTML = "<button class='btn-sm btn-success'onclick='completetask(this)'><i class='material-icons'>done</i></button>";
+    cell4.innerHTML = "<button class='btn-sm btn-danger'onclick='deletetask(this)'><i class='material-icons'>delete</i></button>";
     document.getElementById('task').innerHTML="";
 }
 
@@ -220,10 +208,7 @@ function setCompletedTableAfterRefresh()
 {
 
   if (typeof(Storage) !== "undefined") {
-//     // Store
-// localStorage.setItem("todolsname", "toDoList");
-// // Retrieve
-// console.log(localStorage.getItem("listLength"));
+
  var len = parseInt(localStorage.getItem("completedListLength"));
  console.log("completed length  "+len);
 for(var i=0;i<=len;i++)
@@ -237,16 +222,6 @@ for(var i=0;i<=len;i++)
   }
  
 }
-//  var dataObject = { 'item1': 1, 'item2': 2, 'item3': 3 };
-
-// Set localStorage item
-//  localStorage.setItem('dataObject', JSON.stringify(dataObject));
-
-// Retrieve the object from localStorage
-//  var retrievedObject = localStorage.getItem('dataObject');
-
-// console.log retrieved item
-//  console.log('retrieved data Object: ', JSON.parse(retrievedObject));
   } else {
     alert("Sorry! No Web Storage support..");
   }
@@ -266,10 +241,10 @@ function completetask2(task){
   var cell3 = row.insertCell(2);
   cell1.innerHTML = "<td> <i class='material-icons'>assignment_turned_in</i></td>";
   cell2.innerHTML = "<td>"+task+"</td>";
-  cell3.innerHTML = "<td><input type='button' class='btn-sm btn-primary ' onclick='undotask(this)' value='Undo'></td>";
+  cell3.innerHTML = "<td><button type='button' class='btn-sm btn-primary ' onclick='undotask(this)'><i class='material-icons'>undo</i></button></td>";
 
-
-
-  
-
+}
+function reset(){
+  localStorage.clear();
+  window.location.href="index.html";
 }

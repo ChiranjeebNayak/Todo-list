@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="index.js"></script>
+    <link rel="title icon" type="image/png" href="images/title-img.png"/>
     <title>Todo List</title>
   </head>
-  <body onload="onpageload()">
-    <header class="container  bg-vio mt-5">
+  <body onload="onpageload()" >
+    <header class="container bg-vio mt-5">
         <div class="text-center">
             <div class="text-light h1">
                 TODO LIST
+                <button type="button" class="btn btn-danger mb-1" onclick="reset()"><i class="material-icons">autorenew</i></button>
             </div>
         </div>
     </header>
@@ -36,7 +38,7 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control input-small" placeholder="Add items" id="task" >
                         <div class="input-group-append">
-                        <button class="btn btn-white mr-5 " onclick="addtask()"  id="addtask">Add</button>
+                        <button class="btn btn-white mr-5 " onclick="addtask()"  id="addtask"><i class='material-icons'>add_task</i></button>
                         </div>
                     </div>
             </div>
@@ -45,32 +47,39 @@
         
     </section>
 
-    
-
-
     <section>
-        <div class="container">
+        <div class="container mb-5 ">
             <div class="row">
                 <div class="col col-lg-6 col-sm-12">
                     <div class="heading h4 mt-5">
                         Todo Task
                     </div> 
-                    <table id="myTable">
+                    <div class="table-responsive">
+                        <table class="table" id="myTable">
                         
-                      </table>
+                        </table>
+                    </div>
                 </div>
                 <div class="col col-lg-6 col-sm-12">
                         <div class="heading h4 mt-5">
                             Completed
                         </div> 
-                        <table id="completetable">
+                        <div class="table-responsive">
+                            <table id="completetable">
                             
-                          </table>           
+                            </table>
+                        </div>           
                     </div>  
             </div>
         </div>
     </section>
 
+    <footer class="container  bg-vio mt-5 text-center">
+                <div class="row">
+                    <p class="text-light col-12" style="text-align: center; font-size: 15px; margin-top: 8px;"><em>&copy;2020 Copyright <a href="Chiranjeeb.epizy.com">Chiranjeeb.epizy.com</a>. All rights reserved.</em></p>
+                </div>
+            </div>
+    </footer>
 
 
 
